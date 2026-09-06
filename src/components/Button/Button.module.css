@@ -1,0 +1,45 @@
+
+.container {
+  padding: 20px;
+  background-color: #53c28b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.container:hover {
+  background-color: #3da876;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .container {
+  background-color: #53c28b;
+  color: white;
+}
+
+[data-theme="light"] .container {
+  background-color: #53c28b;
+  color: white;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 14px;
+    font-size: 0.85rem;
+    width: 100%;
+  }
+}

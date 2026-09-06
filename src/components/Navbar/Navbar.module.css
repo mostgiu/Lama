@@ -1,0 +1,169 @@
+.container {
+ height: 100px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Ensure logo is always black in both themes */
+[data-theme="dark"] .logo {
+  color: #000;
+}
+
+[data-theme="light"] .logo {
+  color: #000;
+}
+.links {
+ display: flex;
+ gap: 20px;
+ align-items: center;
+}
+.link {
+  color: var(--link-color, #bbb);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.link.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  color: #53c28b;
+}
+.logout {
+ padding: 10px 15px;
+ border: none;
+ border-radius: 3px;
+ cursor: pointer;
+ background-color: #53c28b;
+ color: white;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--link-color, #bbb);
+  padding: 5px;
+}
+
+.mobileMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #111;
+  padding: 20px;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.mobileMenuOpen {
+  display: flex;
+}
+
+.mobileLink {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 10px;
+  transition: color 0.2s;
+}
+
+.mobileLink:hover {
+  color: #53c28b;
+}
+
+.mobileLink.mobileActive {
+  color: #53c28b;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.mobileLogout {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #6f53c2;
+  color: white;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .container {
+    height: 80px;
+    position: relative;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .links {
+    gap: 12px;
+  }
+
+  .link {
+    font-size: 0.9rem;
+  }
+
+  .logout {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .links {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 70px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .mobileMenuButton {
+    font-size: 22px;
+  }
+
+  .mobileMenu {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .mobileLink {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .mobileLogout {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+}
