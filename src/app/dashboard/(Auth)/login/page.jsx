@@ -16,7 +16,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const username = e.target[0].value;
+    const email = e.target[0].value;
     const password = e.target[1].value;
 
     try {
@@ -24,7 +24,7 @@ function LoginForm() {
       setLoading(true);
 
       const res = await signIn("credentials", {
-        username,
+        email,
         password,
         redirect: false,
       });
@@ -47,9 +47,10 @@ function LoginForm() {
       <h1 className={styles.title}>Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         {success && <p className={styles.success}>{success}</p>}
-        <input type="text" placeholder="Username" className={styles.input} required />
-        <input type="password" placeholder="Password" className={styles.input} required />
+        <input type="email" placeholder="Email" className={styles.input} autoComplete="email" required />
+        <input type="password" placeholder="Password" className={styles.input} autoComplete="current-password" required />
         <button type="submit" className={styles.button} disabled={loading}>
+          {loading && <span className={styles.spinner} />}
           {loading ? "Logging in..." : "Login"}
         </button>
         {error && <p className={styles.error}>Invalid username or password.</p>}

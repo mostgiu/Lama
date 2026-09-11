@@ -2,25 +2,9 @@ import React from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import {notFound} from "next/navigation";
+import { posts } from "./data";
 
-
-
-async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    return notFound();
-  }
-
-  return res.json();
-}
-
-const BlogPage = async () => {
-  const posts = await getData();
-
+const BlogPage = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Welcome to my Blog</h1>

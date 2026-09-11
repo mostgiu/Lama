@@ -5,7 +5,7 @@ import connectMongoDB from "@/lib/mongodb";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -14,37 +14,33 @@ const handler = NextAuth({
     CredentialsProvider({
       id: "credentials",
       name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
 
       async authorize(credentials) {
-        // Implement your own logic to verify the credentials
         await connectMongoDB();
 
-        try {
-          const user = await User.findOne({ email: credentials.email });
-          if (user) {
-            const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-            if (isPasswordValid) {
-              return { id: user._id, email: user.email, name: user.username };
-            } else {
-              throw new Error("Invalid password");
-            }
-          } else {
-            throw new Error("No user found with the provided email");
-          }
-        } catch (error) {
-          console.error("Error during authorization:", error);
+        const user = await User.findOne({ email: credentials.email });
+        if (!user) {
           return null;
         }
 
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        if (!isPasswordValid) {
+          return null;
+        }
 
+        return { id: user._id.toString(), email: user.email, name: user.username };
       },
-    }),   
-   
+    }),
   ],
   pages: {
     error: "/dashboard/login", // Redirect to the login page on error
   },
-     
-});
+};
 
-export { handler as GET, handler as POST }; 
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

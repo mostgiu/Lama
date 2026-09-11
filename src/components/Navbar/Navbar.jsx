@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import styles from "./Navbar.module.css";
 import DarkModeToggle from "../DarkModeToggle/darkmode";
 
@@ -18,6 +18,8 @@ const links = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { status } = useSession();
+  const isAuthenticated = status === "authenticated";
 
   const isActive = (url) =>
     url === "/" ? pathname === "/" : pathname === url || pathname.startsWith(`${url}/`);
@@ -38,9 +40,15 @@ export default function Navbar() {
            {link.title}
          </Link>
        ))}
-       <button className={styles.logout} onClick={() => signOut()}>
-         logout
+       {isAuthenticated ? (
+         <button className={styles.logout} onClick={() => signOut({ callbackUrl: "/" })}>
+           logout
          </button>
+       ) : (
+         <Link href="/dashboard/login" className={styles.link}>
+           login
+         </Link>
+       )}
      </div>
      <button 
        className={styles.mobileMenuButton}
@@ -62,15 +70,25 @@ export default function Navbar() {
               {link.title}
             </Link>
           ))}
-          <button
-            className={styles.mobileLogout}
-            onClick={() => {
-              signOut();
-              setIsMobileMenuOpen(false);
-            }}
-          >
-            logout
-          </button>
+          {isAuthenticated ? (
+            <button
+              className={styles.mobileLogout}
+              onClick={() => {
+                signOut({ callbackUrl: "/" });
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              logout
+            </button>
+          ) : (
+            <Link
+              href="/dashboard/login"
+              className={styles.mobileLink}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              login
+            </Link>
+          )}
         </div>
       )}
     </div>

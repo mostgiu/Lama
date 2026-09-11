@@ -11,9 +11,8 @@
   text-decoration: none;
 }
 
-/* Ensure logo is always black in both themes */
 [data-theme="dark"] .logo {
-  color: #000;
+  color: #ededed;
 }
 
 [data-theme="light"] .logo {

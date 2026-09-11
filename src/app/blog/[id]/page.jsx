@@ -1,23 +1,22 @@
 import React from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
-import {notFound} from 'next/navigation'
+import { notFound } from 'next/navigation'
+import { posts } from '../data'
 
-async function getData(id) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    cache: "no-store",
-  });
+function getData(id) {
+  const post = posts.find((post) => post.id === Number(id));
 
-  if (!res.ok) {
+  if (!post) {
     return notFound();
   }
 
-  return res.json();
+  return post;
 }
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const data = await getData(id);
+  const data = getData(id);
 
   return {
     title: data.title,
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }) {
 
 const BlogPost = async ({ params }) => {
   const { id } = await params;
-  const data = await getData(id);
+  const data = getData(id);
 
   return (
     <article className={styles.container}>

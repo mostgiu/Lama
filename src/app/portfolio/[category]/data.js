@@ -2,9 +2,10 @@ export const items = {
     applications: [
         {
             id: 1,
-            title: "Application 1",
-            description: "This is the first application.",
-            image: "/apps.jpg",
+            title: "Lamamia",
+            description: "A full-stack Next.js app with MongoDB-backed authentication, a blog, and a personal dashboard for creating and managing posts.",
+            image: "/hero.png",
+            url: "/",
         },
         {
             id: 2,

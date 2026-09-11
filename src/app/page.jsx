@@ -16,7 +16,14 @@ export default function Home() {
         <button className={styles.button}>Get Started</button>
       </div>
       <div className={styles.imgContainer}>
-        <Image src="/hero.png" alt="Hero Image" height={500} width={500} className={styles.img} />
+        <Image
+          src="/hero.png"
+          alt="Hero Image"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className={styles.img}
+        />
       </div>
     </div>
 

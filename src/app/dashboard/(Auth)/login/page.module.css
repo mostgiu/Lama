@@ -1,4 +1,4 @@
-ª.container {
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 .title {
   font-size: 3rem;
   margin-bottom: 2rem;
-  color: #007bff;
+  color: #3da876;
 }
 
 .form {
@@ -23,7 +23,7 @@
 
 .input {
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 5px;
   font-size: 1rem;
   background-color: #fff;
@@ -31,8 +31,12 @@
 }
 
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem;
-  background-color: #007bff;
+  background-color: #3da876;
   color: white;
   border: none;
   border-radius: 5px;
@@ -42,7 +46,27 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #3da876;
+}
+
+.button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .divider {
@@ -107,7 +131,7 @@
 }
 
 .registerLink a {
-  color: #007bff;
+  color: #3da876;
   text-decoration: none;
 }
 
